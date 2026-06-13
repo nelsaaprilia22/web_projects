@@ -1,97 +1,596 @@
 <!DOCTYPE html>
-<html lang="en">
-<head> <style>
-    h1 {
-        color:aqua;
-        text-align: center;
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bersahaja Coffee</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
     }
 
-body {
-    color:rgb(162, 231, 231)
-}
-body { 
-    background-color:darkgrey;
-    font-family: sans-serif;
-}
+    body{
+      font-family:'Poppins', sans-serif;
+      background:#f8f3ed;
+      color:#3e2c23;
+      overflow-x:hidden;
+    }
 
-img {
-    border-radius : 50%;
-    display: block;
-    margin: 0 auto 15px;
-}
-section{
-    background-color: darkcyan;
-    padding: 20px;
-    margin: 20px auto;
-    border-radius: 10px;
-    max-width: 600px;
-}
-footer{
-    text-align:center;
-}
-    
+    :root{
+      --coffee:#6f4e37;
+      --cream:#f5ebe0;
+      --white:#ffffff;
+      --dark:#2d1f18;
+    }
 
-</style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    /* Navbar */
+    nav{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 8%;
+      background:rgba(255,255,255,0.95);
+      position:fixed;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(10px);
+      box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .logo{
+      font-size:1.7rem;
+      font-weight:700;
+      color:var(--coffee);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:25px;
+      list-style:none;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--dark);
+      font-weight:500;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:var(--coffee);
+    }
+
+    /* Hero */
+    .hero{
+      height:100vh;
+      background:
+      linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      url('bbb.png');
+      background-size:cover;
+      background-position:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:white;
+      padding:20px;
+    }
+
+    .hero-content{
+      animation:fadeUp 1.5s ease;
+    }
+
+    .hero h1{
+      font-size:3.5rem;
+      margin-bottom:20px;
+    }
+
+    .hero p{
+      font-size:1.1rem;
+      margin-bottom:30px;
+    }
+
+    .btn{
+      padding:14px 28px;
+      background:var(--coffee);
+      color:white;
+      text-decoration:none;
+      border-radius:50px;
+      transition:0.3s;
+      display:inline-block;
+      box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover{
+      transform:translateY(-5px);
+      background:#5a3e2c;
+    }
+
+    section{
+      padding:90px 8%;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .section-title h2{
+      font-size:2.5rem;
+      color:var(--coffee);
+    }
+
+    /* Tentang */
+    .about-card{
+      background:white;
+      border-radius:25px;
+      padding:40px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.08);
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+      align-items:center;
+    }
+
+    .about-card img{
+      width:100%;
+      border-radius:20px;
+    }
+
+    .about-text h3{
+      font-size:2rem;
+      margin-bottom:15px;
+      color:var(--coffee);
+    }
+
+    .about-text p{
+      line-height:1.8;
+    }
+
+    /* Menu */
+    .menu-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+      gap:25px;
+    }
+
+    .menu-card{
+      background:white;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+      transition:0.4s;
+    }
+
+    .menu-card:hover{
+      transform:translateY(-10px);
+    }
+
+    .menu-card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .menu-content{
+      padding:20px;
+    }
+
+    .menu-content h3{
+      margin-bottom:10px;
+      color:var(--coffee);
+    }
+
+    .price{
+      font-weight:600;
+      margin-top:10px;
+    }
+
+    /* Galeri */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+      gap:20px;
+    }
+
+    .gallery-grid img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      border-radius:20px;
+      transition:0.4s;
+    }
+
+    .gallery-grid img:hover{
+      transform:scale(1.05);
+    }
+
+    /* Testimoni */
+    .testimonial-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+      gap:25px;
+    }
+
+    .testimonial-card{
+      background:white;
+      padding:30px;
+      border-radius:20px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);
+      transition:0.3s;
+    }
+
+    .testimonial-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .stars{
+      color:gold;
+      margin-bottom:10px;
+    }
+
+    /* Kontak */
+    .contact-container{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+    }
+
+    .contact-box{
+      background:white;
+      padding:30px;
+      border-radius:20px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .contact-box p{
+      margin:15px 0;
+    }
+
+    iframe{
+      width:100%;
+      height:300px;
+      border:none;
+      border-radius:20px;
+    }
+
+    /* Footer */
+    footer{
+      background:var(--dark);
+      color:white;
+      text-align:center;
+      padding:30px 20px;
+    }
+
+    .socials{
+      margin-top:15px;
+    }
+
+    .socials a{
+      color:white;
+      margin:0 10px;
+      font-size:1.3rem;
+      transition:0.3s;
+    }
+
+    .socials a:hover{
+      color:#d6b48a;
+    }
+
+    /* Animasi */
+    .hidden{
+      opacity:0;
+      transform:translateY(40px);
+      transition:all 1s;
+    }
+
+    .show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(50px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media(max-width:900px){
+
+      .hero h1{
+        font-size:2.5rem;
+      }
+
+      .about-card,
+      .contact-container{
+        grid-template-columns:1fr;
+      }
+
+      .nav-links{
+        gap:15px;
+      }
+    }
+
+    @media(max-width:600px){
+
+      nav{
+        flex-direction:column;
+        gap:15px;
+      }
+
+      .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .hero h1{
+        font-size:2rem;
+      }
+
+      .section-title h2{
+        font-size:2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>profilku </h1>
-    <p> website ini saya buat sebagai latihan html dasar.disini saya belajar membuat struktur halaman web yang rapi dan mudah dipahami.</p>
 
-    <hr>
-<section>
-    
-    <h2>🦭tentang saya</h2>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">
+      <i class="fa-solid fa-mug-hot"></i> Bersahaja Coffee
+    </div>
 
-    <img src="C:\Users\SRMA24KDR041\OneDrive\Pictures\Gojo Satoru☆.jpg" width="100px">
-    <img src="https://ebadrus.my.id/img.png"width="150px">
-    <a href="Gojo Satoru.jpg">yy</a>
-    
-    <p> hai saya Hinata🤞<br>
-        saya sedang belajar web development.
-    </p>
-    <p>saya tertarik belajar coding karena ingin bisa membuat website sendiri dan memahami cara kerja internet.</p>
-
-</section>  
-
-
-<section>
-    <h2>karya saya</h2>
-    <a href="html_basic_01/index.html">karya 01</a>
-    <a href="html_basic_02/index.html">karya 02</a>
-</section>
-<section>
-     
-    <h2>🤗 Hobi</h2>
-    <ul>
-        <li>berhitung</li>
-        <li>bernyanyi</li>
-        <li>menari</li>
-        <li>mendengarkan musik</li>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#galeri">Galeri</a></li>
+      <li><a href="#kontak">Kontak</a></li>
     </ul>
-    
-    
+  </nav>
 
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>“Nikmati Hangatnya Kopi di Setiap Cerita”</h1>
+      <p>Kopi premium dengan suasana hangat dan aesthetic untuk menemani harimu.</p>
+      <a href="#menu" class="btn">Lihat Menu</a>
+    </div>
+  </section>
 
+  <!-- Tentang -->
+  <section id="tentang" class="hidden">
+    <div class="section-title">
+      <h2>Tentang Kedai</h2>
+    </div>
+
+    <div class="about-card">
+      <img src="kopi.png">
+
+      <div class="about-text">
+        <h3>Bersahaja Coffee</h3>
+        <p>
+          Bersahaja Coffee hadir sebagai tempat nyaman untuk menikmati kopi,
+          berbagi cerita, dan menciptakan momen hangat bersama orang terdekat.
+          Dengan desain modern dan menu berkualitas, kami menghadirkan pengalaman
+          ngopi yang elegan namun tetap sederhana.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu" class="hidden">
+    <div class="section-title">
+      <h2>Menu Favorit</h2>
+    </div>
+
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <img src="macha.png">
+        <div class="menu-content">
+          <h3>Kopi macha susu</h3>
+          <p>Kopi susu perpaduan macha dengan aroma khas premium.</p>
+          <div class="price">Rp 10.000</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="americano.png">
+        <div class="menu-content">
+          <h3>Americano</h3>
+          <p>Perpaduan espresso dengan air hangat.</p>
+          <div class="price">Rp 10.000</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="tubruk.png">
+        <div class="menu-content">
+          <h3>Tubruk Susu</h3>
+          <p>perpaduan kopi dengan susu foam lembut.</p>
+          <div class="price">Rp 8.000</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="tiramisu.png">
+        <div class="menu-content">
+          <h3>kopi Tiramisu</h3>
+          <p>Perpaduan susu creamy dan tiramisu.</p>
+          <div class="price">Rp 14.000</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="mie.png">
+        <div class="menu-content">
+          <h3>Mie Goreng</h3>
+          <p>Mie gurih dengan topping spesial.</p>
+          <div class="price">Rp 7.000</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="kntang.png">
+        <div class="menu-content">
+          <h3>Kentang Goreng</h3>
+          <p>Kentang crispy hangat favorit pelanggan.</p>
+          <div class="price">Rp 10.000</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="donat.png">
+        <div class="menu-content">
+          <h3>Donat</h3>
+          <p>Donat lembut dengan topping manis.</p>
+          <div class="price">Rp 14.000</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <img src="siomay.png">
+        <div class="menu-content">
+          <h3>Siomay</h3>
+          <p>Siomay hangat dengan saus kacang.</p>
+          <div class="price">Rp 13.000</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Galeri -->
+  <section id="galeri" class="hidden">
+    <div class="section-title">
+      <h2>Galeri Kedai</h2>
+    </div>
+
+    <div class="gallery-grid">
+      <img src="1.png">
+      <img src="2.png">
+      <img src="kili.png">
+      <img src="baru.png">
+    </div>
+  </section>
+
+  <!-- Testimoni -->
+  <section class="hidden">
+    <div class="section-title">
+      <h2>Testimoni Pelanggan</h2>
+    </div>
+
+    <div class="testimonial-grid">
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>
+          “Tempatnya nyaman banget dan kopinya premium.
+          Cocok buat nongkrong maupun kerja.”
+        </p>
+        <br>
+        <strong>- Andi</strong>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>
+          “Interior aesthetic dan makanannya enak.
+          Paling suka latte dan donatnya!”
+        </p>
+        <br>
+        <strong>- Salsa</strong>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>
+          “Pelayanannya ramah dan suasana hangat.
+          Recommended untuk quality time.”
+        </p>
+        <br>
+        <strong>- Raka</strong>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Kontak -->
+  <section id="kontak" class="hidden">
+    <div class="section-title">
+      <h2>Kontak Kami</h2>
+    </div>
+
+    <div class="contact-container">
+
+      <div class="contact-box">
+        <p><i class="fa-solid fa-location-dot"></i> Jl. Ngadisimo 1 No.28, Ngadirejo, Kec. Kota, Kota Kediri, Jawa Timur 64122</p>
+
+        <p><i class="fa-brands fa-whatsapp"></i> +62 812-3456-7890</p>
+
+        <p><i class="fa-brands fa-instagram"></i> @bersahajacoffee</p>
+
+        <p><i class="fa-solid fa-clock"></i> Buka setiap hari 09.00 - 23.00</p>
+      </div>
+
+      <div>
+        <iframe src="https://www.google.com/maps/embed?pb=!3m2!1sid!2sid!4v1779508539426!5m2!1sid!2sid!6m8!1m7!1sU0cnHzG3BjKxp3lM3aDU7g!2m2!1d-7.814966701791133!2d112.02231242261183!3f210.04662!4f0!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </section>
 
-<section>
-    
-         <h2>😊 Media sosial</h2>
-         <p>Instagram:</p>
-         <p><a href="https://instagram.com/nelsa_ecca_22"><i>@lia</i> <b></b></a></p>
-         <p>Youtube:</p>
-         <p><a href="https://youtube.com/LIA CANS"><i>@hello</i> <b>kili</b></a></p>
+<!-- CONTACT -->">
+        </iframe>
+      </div>
 
-</section>
+    </div>
+  </section>
 
-         <hr>
-         <footer>
-<p>dibuat oleh mas gojo <br>LATIHAN HTML-hari ke-2</p>
-         </footer>
+  <!-- Footer -->
+  <footer>
+    <p>© Kedai Bersahaja Coffee. .</p>
 
-    
+    <div class="socials">
+      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#"><i class="fa-brands fa-facebook"></i></a>
+      <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    const hiddenElements = document.querySelectorAll('.hidden');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+        }
+      });
+    });
+
+    hiddenElements.forEach((el) => observer.observe(el));
+  </script>
+
 </body>
 </html>
